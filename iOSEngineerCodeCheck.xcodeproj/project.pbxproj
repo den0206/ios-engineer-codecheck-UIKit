@@ -10,6 +10,8 @@
 		3A47EEF2258CBC9F00BB1591 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47EEF1258CBC9F00BB1591 /* SearchViewController.swift */; };
 		3A47EF0F258CC52400BB1591 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47EF0E258CC52400BB1591 /* SearchResultCell.swift */; };
 		3A47EF18258CC66D00BB1591 /* anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47EF17258CC66D00BB1591 /* anchor.swift */; };
+		3ACAE03A258CCCE20076D8F5 /* GitHubSeearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAE039258CCCE20076D8F5 /* GitHubSeearchResult.swift */; };
+		3ACAE041258CD0160076D8F5 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAE040258CD0160076D8F5 /* APIManager.swift */; };
 		BF0A658D244F2A3B00280FA6 /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* ViewController2.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
@@ -41,6 +43,8 @@
 		3A47EEF1258CBC9F00BB1591 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = iOSEngineerCodeCheck/Model/SearchViewController.swift; sourceTree = SOURCE_ROOT; };
 		3A47EF0E258CC52400BB1591 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		3A47EF17258CC66D00BB1591 /* anchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = anchor.swift; sourceTree = "<group>"; };
+		3ACAE039258CCCE20076D8F5 /* GitHubSeearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSeearchResult.swift; sourceTree = "<group>"; };
+		3ACAE040258CD0160076D8F5 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		BF0A658C244F2A3B00280FA6 /* ViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 		BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD945DE244DC5E80012785A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +107,7 @@
 		3A47EEED258CBB7900BB1591 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3ACAE039258CCCE20076D8F5 /* GitHubSeearchResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -113,6 +118,14 @@
 				3A47EF17258CC66D00BB1591 /* anchor.swift */,
 			);
 			path = Extenisons;
+			sourceTree = "<group>";
+		};
+		3ACAE03E258CCE3E0076D8F5 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				3ACAE040258CD0160076D8F5 /* APIManager.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		BFD945D2244DC5E80012785A = {
@@ -143,6 +156,7 @@
 				3A47EEED258CBB7900BB1591 /* Model */,
 				3A47EEEB258CBB6E00BB1591 /* View */,
 				3A47EEEC258CBB7100BB1591 /* ViewController */,
+				3ACAE03E258CCE3E0076D8F5 /* API */,
 				3A47EF16258CC65400BB1591 /* Extenisons */,
 				BFD945E7244DC5EB0012785A /* Assets.xcassets */,
 				BFD945E9244DC5EB0012785A /* LaunchScreen.storyboard */,
@@ -300,7 +314,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A47EF18258CC66D00BB1591 /* anchor.swift in Sources */,
+				3ACAE03A258CCCE20076D8F5 /* GitHubSeearchResult.swift in Sources */,
 				3A47EEF2258CBC9F00BB1591 /* SearchViewController.swift in Sources */,
+				3ACAE041258CD0160076D8F5 /* APIManager.swift in Sources */,
 				3A47EF0F258CC52400BB1591 /* SearchResultCell.swift in Sources */,
 				BFD945E3244DC5E80012785A /* ViewController.swift in Sources */,
 				BF0A658D244F2A3B00280FA6 /* ViewController2.swift in Sources */,

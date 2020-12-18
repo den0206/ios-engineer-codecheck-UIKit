@@ -10,6 +10,12 @@ import UIKit
 
 final class SearchResultCell : UITableViewCell {
     
+    var repositry : Repositry? {
+        didSet {
+            configure()
+        }
+    }
+    
     static let Identifer = "searchResultCell"
     
     //MARK: - Parts
@@ -37,5 +43,11 @@ final class SearchResultCell : UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configure() {
+        guard let repositry = repositry else {return}
+        
+        titleLabel.text = repositry.fullName
     }
 }

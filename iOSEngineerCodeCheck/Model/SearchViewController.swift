@@ -10,7 +10,15 @@ import UIKit
 
 final class SearchViewController : UITableViewController {
     
+    var repositries = [Repositry]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    var service = APIService()
     let searchController = UISearchController(searchResultsController: nil)
+    
     
     override func viewDidLoad() {
         
@@ -24,6 +32,9 @@ final class SearchViewController : UITableViewController {
     //MARK: - Functions
     
     private func configureNav() {
+        
+       
+
         self.navigationItem.title = "Search"
         
         navigationItem.searchController = searchController
@@ -33,8 +44,9 @@ final class SearchViewController : UITableViewController {
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
         searchController.searchBar.sizeToFit()
+        searchController.searchBar.placeholder = "Search Repositry"
         searchController.searchBar.searchTextField.backgroundColor = .systemBackground
-        searchController.searchBar.autocorrectionType = .no
+        searchController.searchBar.autocapitalizationType = .none
     }
     
     private func configureTableView() {
@@ -57,17 +69,16 @@ extension SearchViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 5
+        return repositries.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         ///今後カスタマイズできる為,カスタム Cellの作成・仕様
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultCell.Identifer, for: indexPath) as! SearchResultCell
         
-        cell.titleLabel.text = "Sample"
-      
+        cell.repositry = repositries[indexPath.row]
+    
         return  cell
     }
     
@@ -75,6 +86,23 @@ extension SearchViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
         print( indexPath.row)
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.item == repositries.count - 1 {
+            
+            service.searchRepo() { (repos, error) in
+                
+                if error != nil {
+                    print(error!.localizedDescription)
+                    return
+                }
+                
+                self.repositries.append(contentsOf: repos)
+                print(self.repositries.count, self.service.currentPage)
+            }
+        }
     }
 }
 
@@ -86,5 +114,26 @@ extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
         
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        repositries.removeAll()
+        
+        guard let text = searchBar.text else {return}
+        
+        service.searchWord = text
+        
+        service.searchRepo() { (repos, error) in
+            
+            if error != nil {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            self.repositries = repos
+            self.searchController.isActive = false
+            
+        }
     }
 }
