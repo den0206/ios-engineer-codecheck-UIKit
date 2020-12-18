@@ -33,8 +33,6 @@ final class SearchViewController : UITableViewController {
     
     private func configureNav() {
         
-       
-
         self.navigationItem.title = "Search"
         
         navigationItem.searchController = searchController
@@ -83,10 +81,17 @@ extension SearchViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+                
+        var repo : Repositry
         
-        tableView.deselectRow(at: indexPath, animated: true)
-        print( indexPath.row)
+        repo = repositries[indexPath.row]
+        
+        let detailVC = DetailViewController(repo: repo)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
+    
+    
+    /// for pagenation
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
@@ -116,9 +121,17 @@ extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
         
     }
     
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        service.resetService()
+    }
+    
+    /// SearchButton クリック時
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         repositries.removeAll()
+        service.resetService()
         
         guard let text = searchBar.text else {return}
         

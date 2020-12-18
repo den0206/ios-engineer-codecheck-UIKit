@@ -9,7 +9,7 @@
 import Foundation
 
 
-class APIService {
+final class APIService {
     
     var searchWord : String = ""
     var currentPage = 0
@@ -58,6 +58,10 @@ class APIService {
             }
         }
         task.resume()
-        
+    }
+    
+    func resetService() {
+        searchWord = ""
+        currentPage = 0
     }
 }
