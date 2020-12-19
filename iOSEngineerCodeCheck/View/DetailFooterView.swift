@@ -53,7 +53,7 @@ final class DetailFooterView : UIView {
         super.init(frame: frame)
         
         addSubview(langLabel)
-        langLabel.anchor(top: topAnchor, left: leftAnchor, paddongTop: 10, paddingLeft: 8, width:frame.width / 2)
+        langLabel.anchor(top: topAnchor, left: leftAnchor, paddingTop: 10, paddingLeft: 8, width:frame.width / 2)
         
         let stack = UIStackView(arrangedSubviews: [starsLabel,wathersLabel,forksLabel,issueLabel])
         
@@ -80,6 +80,8 @@ final class DetailFooterView : UIView {
     private func configure() {
         
         guard let repo = repo else {return}
+        
+        langLabel.text = "Written in \(repo.language ?? "")"
         
         starsLabel.text = "\(repo.starCount ?? 0 ) stars"
         wathersLabel.text = "\(repo.wacherscount ?? 0) watchers"

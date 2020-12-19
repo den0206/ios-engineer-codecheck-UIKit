@@ -42,7 +42,7 @@ final class DetailHeaderView : UIView {
         
         addSubview(titleLabel)
         titleLabel.centerX(inView: self)
-        titleLabel.anchor(top : imageView.bottomAnchor, bottom: bottomAnchor, paddongTop: 12)
+        titleLabel.anchor(top : imageView.bottomAnchor, bottom: bottomAnchor, paddingTop: 12)
      
     }
     

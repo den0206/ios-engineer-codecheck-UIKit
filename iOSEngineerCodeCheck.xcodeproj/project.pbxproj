@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		03E7DEE0B22069D4711A8441 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9E5382EB6CF1D9DE4AED10F /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework */; };
 		13B6E777F49D7E631732C3A2 /* Pods_iOSEngineerCodeCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5F72207AADAD2EB1880D83D /* Pods_iOSEngineerCodeCheck.framework */; };
+		3A4397A6258DA542008A6BEB /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4397A5258DA542008A6BEB /* Helpers.swift */; };
+		3A4397AB258DA69E008A6BEB /* Reachabilty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4397AA258DA69E008A6BEB /* Reachabilty.swift */; };
 		3A47EEF2258CBC9F00BB1591 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47EEF1258CBC9F00BB1591 /* SearchViewController.swift */; };
 		3A47EF0F258CC52400BB1591 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47EF0E258CC52400BB1591 /* SearchResultCell.swift */; };
 		3A47EF18258CC66D00BB1591 /* anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47EF17258CC66D00BB1591 /* anchor.swift */; };
@@ -47,6 +49,8 @@
 /* Begin PBXFileReference section */
 		1DE98AA75118C8FBF8257CD4 /* Pods_iOSEngineerCodeCheckTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSEngineerCodeCheckTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E93BAF90EB3F239F97FF68 /* Pods-iOSEngineerCodeCheck.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSEngineerCodeCheck.release.xcconfig"; path = "Target Support Files/Pods-iOSEngineerCodeCheck/Pods-iOSEngineerCodeCheck.release.xcconfig"; sourceTree = "<group>"; };
+		3A4397A5258DA542008A6BEB /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		3A4397AA258DA69E008A6BEB /* Reachabilty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachabilty.swift; sourceTree = "<group>"; };
 		3A47EEF1258CBC9F00BB1591 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = iOSEngineerCodeCheck/Model/SearchViewController.swift; sourceTree = SOURCE_ROOT; };
 		3A47EF0E258CC52400BB1591 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		3A47EF17258CC66D00BB1591 /* anchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = anchor.swift; sourceTree = "<group>"; };
@@ -136,6 +140,8 @@
 			isa = PBXGroup;
 			children = (
 				3A47EF17258CC66D00BB1591 /* anchor.swift */,
+				3A4397A5258DA542008A6BEB /* Helpers.swift */,
+				3A4397AA258DA69E008A6BEB /* Reachabilty.swift */,
 			);
 			path = Extenisons;
 			sourceTree = "<group>";
@@ -468,10 +474,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A4397AB258DA69E008A6BEB /* Reachabilty.swift in Sources */,
 				3A47EF18258CC66D00BB1591 /* anchor.swift in Sources */,
 				3ACAE060258CED010076D8F5 /* DetailHeaderView.swift in Sources */,
 				3ACAE05B258CEC3D0076D8F5 /* DeatailViewController.swift in Sources */,
 				3ACAE03A258CCCE20076D8F5 /* GitHubSearchResult.swift in Sources */,
+				3A4397A6258DA542008A6BEB /* Helpers.swift in Sources */,
 				3A47EEF2258CBC9F00BB1591 /* SearchViewController.swift in Sources */,
 				3ACAE041258CD0160076D8F5 /* APIManager.swift in Sources */,
 				3A47EF0F258CC52400BB1591 /* SearchResultCell.swift in Sources */,

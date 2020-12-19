@@ -13,7 +13,7 @@ final class APIService {
     
     var searchWord : String = ""
     var currentPage = 0
-    
+
     let per_Page = 20
     
     func searchRepo(completion : @escaping([Repositry], Error?) -> Void ) {
@@ -25,11 +25,12 @@ final class APIService {
         guard let url = URL(string: baseUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") else {return }
         
         let session = URLSession(configuration: .default)
-        
+    
         let task = session.dataTask(with: url) { (data, _, error) in
             
             if error != nil {
                 print(error!.localizedDescription)
+            
                 completion(repositries, error)
                 return
             }
@@ -45,16 +46,17 @@ final class APIService {
                     DispatchQueue.main.async {
                         
                         repositries.append(contentsOf: decorderData.items!)
+                        
                         completion(repositries,nil)
                         
                         self.currentPage += 1
                        
                     }
-                    
                 }
                 
             } catch {
                 completion(repositries,error)
+                return
             }
         }
         task.resume()

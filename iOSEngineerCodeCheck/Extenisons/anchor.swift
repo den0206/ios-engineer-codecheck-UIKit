@@ -11,12 +11,12 @@ import UIKit
 
 extension UIView {
     
-    func anchor(top : NSLayoutYAxisAnchor? = nil, left : NSLayoutXAxisAnchor? = nil, bottom :NSLayoutYAxisAnchor? = nil, right : NSLayoutXAxisAnchor? = nil, paddongTop : CGFloat = 0, paddingLeft : CGFloat = 0, paddiongBottom : CGFloat = 0, paddingRight : CGFloat = 0, width : CGFloat? = nil, height : CGFloat? = nil) {
+    func anchor(top : NSLayoutYAxisAnchor? = nil, left : NSLayoutXAxisAnchor? = nil, bottom :NSLayoutYAxisAnchor? = nil, right : NSLayoutXAxisAnchor? = nil, paddingTop : CGFloat = 0, paddingLeft : CGFloat = 0, paddiongBottom : CGFloat = 0, paddingRight : CGFloat = 0, width : CGFloat? = nil, height : CGFloat? = nil) {
         
         translatesAutoresizingMaskIntoConstraints = false
         
         if let top = top {
-            topAnchor.constraint(equalTo: top, constant: paddongTop).isActive = true
+            topAnchor.constraint(equalTo: top, constant: paddingTop).isActive = true
         }
         
         if let left = left {
@@ -81,13 +81,3 @@ extension UIView {
 
 
 }
-
-extension UIViewController {
-
-
-    var topbarHeight: CGFloat {
-        return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
-            (self.navigationController?.navigationBar.frame.height ?? 0.0)
-    }
-}
-
