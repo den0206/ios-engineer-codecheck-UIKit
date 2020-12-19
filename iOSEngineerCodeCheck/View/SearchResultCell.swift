@@ -16,7 +16,7 @@ final class SearchResultCell : UITableViewCell {
         }
     }
     
-    static let Identifer = "searchResultCell"
+    static let reuseIdentifier = "searchResultCell"
     
     //MARK: - Parts
     

@@ -27,6 +27,8 @@ struct Repositry : Codable,Identifiable{
     let issuesCount : Int?
     let owner : Owner
     
+    var favorited = false
+    
     enum CodingKeys: String, CodingKey {
         case id,name,language,owner
         case fullName = "full_name"
@@ -35,9 +37,7 @@ struct Repositry : Codable,Identifiable{
         case forksCount = "forks_count"
         case issuesCount = "open_issues_count"
     }
-    
-    
-    
+ 
 }
 
 struct Owner: Codable {

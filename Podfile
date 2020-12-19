@@ -6,6 +6,7 @@ target 'iOSEngineerCodeCheck' do
   use_frameworks!
   
   pod 'SDWebImage'
+  pod 'RealmSwift'
 
   # Pods for iOSEngineerCodeCheck
 

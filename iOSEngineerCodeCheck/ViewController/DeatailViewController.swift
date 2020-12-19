@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import RealmSwift
 
-final class DetailViewController : UIViewController {
+class DetailViewController : UIViewController {
     
-    let repositry : Repositry
+    var repositry : Repositry
+    var RM = RealmManager()
     
     private let screenHight = UIScreen.main.bounds.height
     private let topPadding : CGFloat = 5
@@ -28,8 +30,14 @@ final class DetailViewController : UIViewController {
    
     
     override func viewDidLoad() {
-       
+        
+        super.viewDidLoad()
+        
+        /// Favorite されているかの確認 (Realmの管理は,RealmManager に一任)
+        repositry.favorited = RM.checkFavorited(repoID: repositry.id)
+        print(repositry.favorited)
         configureUI()
+        
     }
     
     //MARK: - UI
@@ -45,10 +53,31 @@ final class DetailViewController : UIViewController {
         view.addSubview(header)
         
         let footer = DetailFooterView(frame:CGRect(x: 0, y: screenHight / 2 + topPadding, width: view.frame.width, height:screenHight / 2))
-        
+        footer.delegate = self
         footer.repo = repositry
         
         view.addSubview(footer)
 
     }
+}
+
+//MARK: - Manage Favorite
+
+extension DetailViewController : DetailFooterViewProtocol {
+    
+    func handleFavorite(footer: DetailFooterView) {
+        
+        if repositry.favorited {
+            /// remove fav
+            RM.deleteFavorite(repo: repositry)
+        } else {
+            /// add fav
+            RM.addFavorite(repo: repositry)
+        }
+        
+        repositry.favorited.toggle()
+        footer.configureStarImage(repo: repositry)
+    }
+
+    
 }

@@ -11,6 +11,9 @@ import SwiftUI
 
 final class SearchViewController : UITableViewController {
     
+    /// @AppStorage を使用の為,SwiftUIをimport
+    @AppStorage("useIncremental") var useIncremental = true
+    
     var repositries = [Repositry]() {
         didSet {
             tableView.reloadData()
@@ -21,11 +24,12 @@ final class SearchViewController : UITableViewController {
     var reachLast = false
     
     let searchController = UISearchController(searchResultsController: nil)
-    @AppStorage("useIncremental") var useIncremental = true
     var timer : Timer?
     
     
     override func viewDidLoad() {
+        
+        super.viewDidLoad()
         
         configureNav()
         configureTableView()
@@ -62,7 +66,7 @@ final class SearchViewController : UITableViewController {
         tableView.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
         tableView.scrollIndicatorInsets = UIEdgeInsets(top:5 , left: 0, bottom: 5, right: 0)
         
-        tableView.register(SearchResultCell.self, forCellReuseIdentifier: SearchResultCell.Identifer)
+        tableView.register(SearchResultCell.self, forCellReuseIdentifier: SearchResultCell.reuseIdentifier)
 
         
         tableView.tableFooterView = UIView()
@@ -108,7 +112,7 @@ extension SearchViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         ///今後カスタマイズできる為,カスタム Cellの作成・仕様
-        let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultCell.Identifer, for: indexPath) as! SearchResultCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultCell.reuseIdentifier, for: indexPath) as! SearchResultCell
         
         cell.repositry = repositries[indexPath.row]
         
@@ -166,11 +170,7 @@ extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
         }
         
     }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        resetSearch()
-    }
-    
+
     /// SearchButton クリック時
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -197,14 +197,14 @@ extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
             return
         }
         
-        self.navigationController?.showLoadindView(true)
+        self.tabBarController?.showLoadindView(true)
         
         service.searchRepo() { (repos, error) in
             
             if error != nil {
                 
                 self.showAlert(message: error!.localizedDescription)
-                self.navigationController?.showLoadindView(false)
+                self.tabBarController?.showLoadindView(false)
 
                 return
             }
@@ -223,11 +223,16 @@ extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
             }
             
             self.searchController.isActive = false
-            self.navigationController?.showLoadindView(false)
+            self.tabBarController?.showLoadindView(false)
 
             
         }
      
+    }
+    
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        resetSearch()
     }
     
     private func resetSearch() {

@@ -14,10 +14,15 @@
 		3A47EEF2258CBC9F00BB1591 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47EEF1258CBC9F00BB1591 /* SearchViewController.swift */; };
 		3A47EF0F258CC52400BB1591 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47EF0E258CC52400BB1591 /* SearchResultCell.swift */; };
 		3A47EF18258CC66D00BB1591 /* anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47EF17258CC66D00BB1591 /* anchor.swift */; };
+		3A5B6C44258DECF40082FBFE /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B6C43258DECF40082FBFE /* MainTabController.swift */; };
+		3A5B6C52258DEFF20082FBFE /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B6C51258DEFF20082FBFE /* FavoriteViewController.swift */; };
+		3A5B6C57258DF27D0082FBFE /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B6C56258DF27D0082FBFE /* FavoriteCell.swift */; };
+		3A6934DA258DF848006268F9 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6934D9258DF848006268F9 /* Favorite.swift */; };
 		3ACAE03A258CCCE20076D8F5 /* GitHubSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAE039258CCCE20076D8F5 /* GitHubSearchResult.swift */; };
 		3ACAE041258CD0160076D8F5 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAE040258CD0160076D8F5 /* APIManager.swift */; };
 		3ACAE05B258CEC3D0076D8F5 /* DeatailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAE05A258CEC3D0076D8F5 /* DeatailViewController.swift */; };
 		3ACAE060258CED010076D8F5 /* DetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAE05F258CED010076D8F5 /* DetailHeaderView.swift */; };
+		3ADFEA60258E3C0800BD97B5 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADFEA5F258E3C0800BD97B5 /* RealmManager.swift */; };
 		3AF52D55258CFE8E002DCDDF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AF52D54258CFE8E002DCDDF /* Main.storyboard */; };
 		3AF52D5A258D054A002DCDDF /* DetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF52D59258D054A002DCDDF /* DetailFooterView.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
@@ -54,10 +59,15 @@
 		3A47EEF1258CBC9F00BB1591 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = iOSEngineerCodeCheck/Model/SearchViewController.swift; sourceTree = SOURCE_ROOT; };
 		3A47EF0E258CC52400BB1591 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		3A47EF17258CC66D00BB1591 /* anchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = anchor.swift; sourceTree = "<group>"; };
+		3A5B6C43258DECF40082FBFE /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
+		3A5B6C51258DEFF20082FBFE /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		3A5B6C56258DF27D0082FBFE /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
+		3A6934D9258DF848006268F9 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		3ACAE039258CCCE20076D8F5 /* GitHubSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchResult.swift; sourceTree = "<group>"; };
 		3ACAE040258CD0160076D8F5 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		3ACAE05A258CEC3D0076D8F5 /* DeatailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeatailViewController.swift; sourceTree = "<group>"; };
 		3ACAE05F258CED010076D8F5 /* DetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderView.swift; sourceTree = "<group>"; };
+		3ADFEA5F258E3C0800BD97B5 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		3AF52D54258CFE8E002DCDDF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3AF52D59258D054A002DCDDF /* DetailFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFooterView.swift; sourceTree = "<group>"; };
 		5D6EF6FE0C95CC0A7A732039 /* Pods-iOSEngineerCodeCheckTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSEngineerCodeCheckTests.release.xcconfig"; path = "Target Support Files/Pods-iOSEngineerCodeCheckTests/Pods-iOSEngineerCodeCheckTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -113,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				3A47EF0E258CC52400BB1591 /* SearchResultCell.swift */,
+				3A5B6C56258DF27D0082FBFE /* FavoriteCell.swift */,
 				3ACAE05F258CED010076D8F5 /* DetailHeaderView.swift */,
 				3AF52D59258D054A002DCDDF /* DetailFooterView.swift */,
 			);
@@ -122,8 +133,10 @@
 		3A47EEEC258CBB7100BB1591 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				3A5B6C43258DECF40082FBFE /* MainTabController.swift */,
 				3A47EEF1258CBC9F00BB1591 /* SearchViewController.swift */,
 				3ACAE05A258CEC3D0076D8F5 /* DeatailViewController.swift */,
+				3A5B6C51258DEFF20082FBFE /* FavoriteViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -132,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				3ACAE039258CCCE20076D8F5 /* GitHubSearchResult.swift */,
+				3A6934D9258DF848006268F9 /* Favorite.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -150,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				3ACAE040258CD0160076D8F5 /* APIManager.swift */,
+				3ADFEA5F258E3C0800BD97B5 /* RealmManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -480,10 +495,15 @@
 				3ACAE05B258CEC3D0076D8F5 /* DeatailViewController.swift in Sources */,
 				3ACAE03A258CCCE20076D8F5 /* GitHubSearchResult.swift in Sources */,
 				3A4397A6258DA542008A6BEB /* Helpers.swift in Sources */,
+				3ADFEA60258E3C0800BD97B5 /* RealmManager.swift in Sources */,
+				3A5B6C44258DECF40082FBFE /* MainTabController.swift in Sources */,
 				3A47EEF2258CBC9F00BB1591 /* SearchViewController.swift in Sources */,
 				3ACAE041258CD0160076D8F5 /* APIManager.swift in Sources */,
+				3A6934DA258DF848006268F9 /* Favorite.swift in Sources */,
 				3A47EF0F258CC52400BB1591 /* SearchResultCell.swift in Sources */,
+				3A5B6C52258DEFF20082FBFE /* FavoriteViewController.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
+				3A5B6C57258DF27D0082FBFE /* FavoriteCell.swift in Sources */,
 				3AF52D5A258D054A002DCDDF /* DetailFooterView.swift in Sources */,
 				BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */,
 			);
