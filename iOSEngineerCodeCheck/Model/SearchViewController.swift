@@ -122,7 +122,7 @@ extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
+        repositries.removeAll()
         service.resetService()
     }
     
