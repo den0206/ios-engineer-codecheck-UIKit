@@ -24,7 +24,7 @@ extension UIViewController {
             (self.navigationController?.navigationBar.frame.height ?? 0.0)
     }
     
-    func showLoadindView(_ present : Bool, message : String? = nil) {
+    func showLoadindView(_ present : Bool, message : String? = "Loading...") {
         
         if present {
             

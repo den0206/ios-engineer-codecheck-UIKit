@@ -14,6 +14,8 @@ protocol MainTabControllerDelegate {
 
 final class MainTabController : UITabBarController , UITabBarControllerDelegate{
     
+    //MARK: - LifeCycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,6 +24,8 @@ final class MainTabController : UITabBarController , UITabBarControllerDelegate{
         configureTabController()
    
     }
+    
+    //MARK: - UI
     
     private func configureTabController() {
         

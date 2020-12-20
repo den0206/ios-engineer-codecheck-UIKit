@@ -11,22 +11,22 @@ import RealmSwift
 
 final class FavoriteViewController : UICollectionViewController, MainTabControllerDelegate {
     
+    //MARK: - Properties
+    
     var favorites : Results<Favorite>!
     
-    var service = APIService()
-
-    let RM = RealmManager()
     var token : NotificationToken!
     
+    private let service = APIService()
+    private let RM = RealmManager()
+   
     private let sectionInsets = UIEdgeInsets(top: 20.0, left: 25.0, bottom: 20.0, right: 25.0)
     private let itemsPerRow : CGFloat = 2
     
+    //MARK: - LifeCycle
+    
     init() {
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -37,13 +37,34 @@ final class FavoriteViewController : UICollectionViewController, MainTabControll
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     //MARK: - UI
     
     private func configureCV() {
-        navigationItem.title = "Favorite"
+        /// BackButton タイトル
+        navigationItem.title = "Favorites"
+        
         
         collectionView.backgroundColor = .white
+        
         collectionView.register(FavoriteCell.self, forCellWithReuseIdentifier: FavoriteCell.reuseIdentifier)
+        
+        collectionView.register(FavoriteHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: FavoriteHeaderView.reuseIdentifier)
         
     }
     
@@ -102,28 +123,43 @@ extension FavoriteViewController {
         
         self.tabBarController?.showLoadindView(true)
         
-        /// Favorite ID から API経由でRepo情報を獲得,遷移
-        
-        service.fetchSpecificRepo(repoId: fav.repoId) { (repo, error) in
+        /// Favorite ID から API経由でRepo Modelを獲得,遷移
+        service.fetchRepo(repoId: fav.repoId) { (result) in
             
-            if error != nil {
-                self.tabBarController?.showLoadindView(false)
-                self.showAlert(message: error!.localizedDescription)
-                return
-            }
+            switch result {
             
-            guard let repo = repo else {
-                self.tabBarController?.showLoadindView(false)
-                return
+            case .success(let repo):
+                
+                let detailVC = DetailViewController(repo: repo)
+                self.navigationController?.pushViewController(detailVC, animated: true)
+                
+            case .failure(let error):
+                self.showAlert(message: error.localizedDescription)
             }
             
             self.tabBarController?.showLoadindView(false)
-            
-            let detailVC = DetailViewController(repo: repo)
-            self.navigationController?.pushViewController(detailVC, animated: true)
+
+        }
+    }
+    
+    /// CollectionView Header お気に入り件数の表示
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: FavoriteHeaderView.reuseIdentifier, for: indexPath) as! FavoriteHeaderView
+        
+        if kind == UICollectionView.elementKindSectionHeader {
+            header.favoriteConterLabel.text = "お気に入り\(favorites.count) 件"
         }
         
+        return header
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        
+        return CGSize(width: view.frame.width, height: 50)
+    }
+    
     
     //MARK: - Delete
     

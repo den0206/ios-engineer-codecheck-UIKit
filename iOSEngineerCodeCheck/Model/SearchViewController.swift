@@ -11,6 +11,8 @@ import SwiftUI
 
 final class SearchViewController : UITableViewController,MainTabControllerDelegate {
     
+    //MARK: - Properties
+
     /// @AppStorage を使用の為,SwiftUIをimport
     @AppStorage("useIncremental") var useIncremental = true
     
@@ -20,13 +22,14 @@ final class SearchViewController : UITableViewController,MainTabControllerDelega
         }
     }
     
-    var service = APIService()
-    var reachLast = false
+    private let service = APIService()
+    private let searchController = UISearchController(searchResultsController: nil)
     
-    let searchController = UISearchController(searchResultsController: nil)
+    var reachLast = false
     var timer : Timer?
     
-    
+    //MARK: - LifeCycle
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -158,7 +161,6 @@ extension SearchViewController {
 //MARK: - UISearchResultsUpdating, UISearchBarDelegate
 
 extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
-    
     /// インクリメンタルサーチ
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -210,33 +212,36 @@ extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
         
         self.tabBarController?.showLoadindView(true)
         
-        service.searchRepo() { (repos, error) in
+        service.searchRepos { (result) in
             
-            if error != nil {
-                
-                self.showAlert(message: error!.localizedDescription)
-                self.tabBarController?.showLoadindView(false)
-
-                return
-            }
+            switch result {
             
-            if repos.count > 0 {
+            case .success(let repos):
                 
-                switch isPagination {
-                case true :
-                    self.repositries.append(contentsOf: repos)
+                if repos.count > 0 {
+                    
+                    switch isPagination {
+                    
+                    case true :
+                        self.repositries.append(contentsOf: repos)
 
-                case false :
-                    self.repositries = repos
+                    case false :
+                        self.repositries = repos
+                    }
+                } else {
+                    self.reachLast = true
                 }
-            } else {
-                self.reachLast = true
+                
+            case .failure(let error):
+                self.showAlert(message: error.localizedDescription)
+                
             }
             
             self.searchController.isActive = false
             self.tabBarController?.showLoadindView(false)
+ 
         }
-     
+        
     }
     
     

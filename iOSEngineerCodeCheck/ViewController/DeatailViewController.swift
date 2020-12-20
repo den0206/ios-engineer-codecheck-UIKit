@@ -11,19 +11,20 @@ import RealmSwift
 
 class DetailViewController : UIViewController {
     
-    var repositry : Repositry
-    var RM = RealmManager()
-    
-    var didLoad = true
-    
-    /// footer はview表示毎に,checkfavoritedを行う為
-    var footer : DetailFooterView!
-    
+    //MARK: - Properties
 
+    var repositry : Repositry
     
+    private let RM = RealmManager()
     private let screenHight = UIScreen.main.bounds.height
     private let topPadding : CGFloat = 5
     
+    /// footer はview表示毎に,checkfavoritedを行う為
+    var footer : DetailFooterView!
+    var didLoad = true
+   
+    //MARK: - LifeCycle
+
     
     init(repo : Repositry) {
         
@@ -38,9 +39,7 @@ class DetailViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(repositry.id)
-    
+            
         repositry.favorited = RM.checkFavorited(repoID: repositry.id)
         configureUI()
         

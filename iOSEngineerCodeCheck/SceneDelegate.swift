@@ -21,6 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         window = UIWindow(windowScene: scene)
+        /// Root を tab に変更
         window?.rootViewController = MainTabController()
         window?.makeKeyAndVisible()
     }
