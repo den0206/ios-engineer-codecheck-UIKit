@@ -13,6 +13,7 @@ final class Favorite : Object {
     @objc dynamic var id = 0
     @objc dynamic var repoId = 0
     
+    /// cellに表示する property
     @objc dynamic var title = ""
     @objc dynamic var thumbnailUrl = ""
     

@@ -20,11 +20,14 @@ final class MainTabController : UITabBarController , UITabBarControllerDelegate{
         view.backgroundColor = .white
         
         configureTabController()
-        
-        
+   
     }
     
     private func configureTabController() {
+        
+        /// TabBar選択時の色
+        UITabBar.appearance().tintColor = .black
+
         let searchVC = SearchViewController()
         let nav1 = templeteNavigationController(image: UIImage(systemName: "magnifyingglass"), title: "Search", rootViewController: searchVC)
         
@@ -48,6 +51,7 @@ final class MainTabController : UITabBarController , UITabBarControllerDelegate{
         /// set basic Color
         appearence.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         appearence.backgroundColor = UIColor.white
+        UINavigationBar.appearance().tintColor = .black
         
         nav.navigationBar.standardAppearance = appearence
         nav.navigationBar.compactAppearance = appearence
@@ -65,10 +69,15 @@ final class MainTabController : UITabBarController , UITabBarControllerDelegate{
         let viewController = viewController as! UINavigationController
         
         if viewController.viewControllers.first is SearchViewController {
-            /// when selected SearchVC
+            let vc = viewController.viewControllers.first  as! SearchViewController
+            /// Tab選択時に, TableView最上部にスクロール
+            vc.didSelectTab(tabBarController: self)
         } else if viewController.viewControllers.first is FavoriteViewController {
             let vc = viewController.viewControllers.first  as! MainTabControllerDelegate
+            /// Tab選択時に,Collectionview最上部にスクロール
             vc.didSelectTab(tabBarController: self)
         }
+        
+
     }
 }

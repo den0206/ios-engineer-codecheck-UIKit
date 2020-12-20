@@ -10,13 +10,13 @@ import UIKit
 
 final class SearchResultCell : UITableViewCell {
     
+    static let reuseIdentifier = "searchResultCell"
+    
     var repositry : Repositry? {
         didSet {
             configure()
         }
     }
-    
-    static let reuseIdentifier = "searchResultCell"
     
     //MARK: - Parts
     

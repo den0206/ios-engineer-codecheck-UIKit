@@ -13,6 +13,7 @@ import RealmSwift
 final class RealmManager {
     
     let realm = try! Realm()
+    let limit = 20
   
     func addFavorite(repo : Repositry) {
         
@@ -33,6 +34,11 @@ final class RealmManager {
             
             realm.add(favorite, update: .all)
             
+            /// limit
+            if realm.objects(Favorite.self).count == limit + 1 {
+                realm.delete(realm.objects(Favorite.self).first!)
+            }
+            
             print(Realm.Configuration.defaultConfiguration.fileURL!)
             print("call")
         })
@@ -45,6 +51,13 @@ final class RealmManager {
         try! realm.write({
             realm.delete(favorite)
         })
+    }
+    
+    func fetchAllFavorite() -> Results<Favorite>{
+        var favorites : Results<Favorite>
+        favorites = realm.objects(Favorite.self).sorted(byKeyPath: "id", ascending: false)
+        
+        return favorites
     }
     
     func checkFavorited(repoID : Int) -> Bool {

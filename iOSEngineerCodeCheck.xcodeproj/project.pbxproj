@@ -19,7 +19,7 @@
 		3A5B6C57258DF27D0082FBFE /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B6C56258DF27D0082FBFE /* FavoriteCell.swift */; };
 		3A6934DA258DF848006268F9 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6934D9258DF848006268F9 /* Favorite.swift */; };
 		3ACAE03A258CCCE20076D8F5 /* GitHubSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAE039258CCCE20076D8F5 /* GitHubSearchResult.swift */; };
-		3ACAE041258CD0160076D8F5 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAE040258CD0160076D8F5 /* APIManager.swift */; };
+		3ACAE041258CD0160076D8F5 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAE040258CD0160076D8F5 /* APIService.swift */; };
 		3ACAE05B258CEC3D0076D8F5 /* DeatailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAE05A258CEC3D0076D8F5 /* DeatailViewController.swift */; };
 		3ACAE060258CED010076D8F5 /* DetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAE05F258CED010076D8F5 /* DetailHeaderView.swift */; };
 		3ADFEA60258E3C0800BD97B5 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADFEA5F258E3C0800BD97B5 /* RealmManager.swift */; };
@@ -64,7 +64,7 @@
 		3A5B6C56258DF27D0082FBFE /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		3A6934D9258DF848006268F9 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		3ACAE039258CCCE20076D8F5 /* GitHubSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchResult.swift; sourceTree = "<group>"; };
-		3ACAE040258CD0160076D8F5 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		3ACAE040258CD0160076D8F5 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		3ACAE05A258CEC3D0076D8F5 /* DeatailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeatailViewController.swift; sourceTree = "<group>"; };
 		3ACAE05F258CED010076D8F5 /* DetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderView.swift; sourceTree = "<group>"; };
 		3ADFEA5F258E3C0800BD97B5 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
@@ -163,7 +163,7 @@
 		3ACAE03E258CCE3E0076D8F5 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				3ACAE040258CD0160076D8F5 /* APIManager.swift */,
+				3ACAE040258CD0160076D8F5 /* APIService.swift */,
 				3ADFEA5F258E3C0800BD97B5 /* RealmManager.swift */,
 			);
 			path = API;
@@ -498,7 +498,7 @@
 				3ADFEA60258E3C0800BD97B5 /* RealmManager.swift in Sources */,
 				3A5B6C44258DECF40082FBFE /* MainTabController.swift in Sources */,
 				3A47EEF2258CBC9F00BB1591 /* SearchViewController.swift in Sources */,
-				3ACAE041258CD0160076D8F5 /* APIManager.swift in Sources */,
+				3ACAE041258CD0160076D8F5 /* APIService.swift in Sources */,
 				3A6934DA258DF848006268F9 /* Favorite.swift in Sources */,
 				3A47EF0F258CC52400BB1591 /* SearchResultCell.swift in Sources */,
 				3A5B6C52258DEFF20082FBFE /* FavoriteViewController.swift in Sources */,

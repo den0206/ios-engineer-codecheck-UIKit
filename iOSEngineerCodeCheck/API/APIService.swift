@@ -9,6 +9,8 @@
 import Foundation
 
 
+   //API処理は当クラスで管理を一任
+
 final class APIService {
     
     var searchWord : String = ""
@@ -56,6 +58,42 @@ final class APIService {
                 
             } catch {
                 completion(repositries,error)
+                return
+            }
+        }
+        task.resume()
+    }
+    
+    func fetchSpecificRepo(repoId : Int , completion : @escaping(Repositry?,Error?) -> Void) {
+        
+        let baseUrl = "https://api.github.com/repositories/\(repoId)"
+        
+        guard let url = URL(string: baseUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") else {return }
+        
+        let session = URLSession(configuration: .default)
+        
+        let task = session.dataTask(with: url) { (data, _, error) in
+            
+            if error != nil {
+                completion(nil, error)
+                return
+            }
+            
+            guard let safeData = data else {return}
+            
+            let decorder = JSONDecoder()
+            
+            do {
+                let repoData = try decorder.decode(Repositry.self, from: safeData)
+                
+                DispatchQueue.main.async {
+                    completion(repoData, nil)
+
+                }
+            } catch {
+                
+                completion(nil, error)
+
                 return
             }
         }

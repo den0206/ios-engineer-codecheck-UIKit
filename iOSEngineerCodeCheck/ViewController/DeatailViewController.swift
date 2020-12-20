@@ -14,6 +14,13 @@ class DetailViewController : UIViewController {
     var repositry : Repositry
     var RM = RealmManager()
     
+    var didLoad = true
+    
+    /// footer はview表示毎に,checkfavoritedを行う為
+    var footer : DetailFooterView!
+    
+
+    
     private let screenHight = UIScreen.main.bounds.height
     private let topPadding : CGFloat = 5
     
@@ -30,14 +37,25 @@ class DetailViewController : UIViewController {
    
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
-        /// Favorite されているかの確認 (Realmの管理は,RealmManager に一任)
+        print(repositry.id)
+    
         repositry.favorited = RM.checkFavorited(repoID: repositry.id)
-        print(repositry.favorited)
         configureUI()
         
+        didLoad = false
+  
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if !didLoad {
+            repositry.favorited = RM.checkFavorited(repoID: repositry.id)
+            footer.repo = repositry
+        }
     }
     
     //MARK: - UI
@@ -52,7 +70,8 @@ class DetailViewController : UIViewController {
         
         view.addSubview(header)
         
-        let footer = DetailFooterView(frame:CGRect(x: 0, y: screenHight / 2 + topPadding, width: view.frame.width, height:screenHight / 2))
+        footer = DetailFooterView(frame:CGRect(x: 0, y: screenHight / 2 + topPadding, width: view.frame.width, height:screenHight / 2))
+        
         footer.delegate = self
         footer.repo = repositry
         

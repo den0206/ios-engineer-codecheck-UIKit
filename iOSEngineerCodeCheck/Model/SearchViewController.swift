@@ -9,7 +9,7 @@
 import UIKit
 import SwiftUI
 
-final class SearchViewController : UITableViewController {
+final class SearchViewController : UITableViewController,MainTabControllerDelegate {
     
     /// @AppStorage を使用の為,SwiftUIをimport
     @AppStorage("useIncremental") var useIncremental = true
@@ -98,6 +98,16 @@ final class SearchViewController : UITableViewController {
             useIncremental = false
         }
     }
+    
+    /// Tab選択時に,最上部にスクロール
+    func didSelectTab(tabBarController: UITabBarController) {
+        
+        if repositries.count > service.per_Page {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+
+        }
+    }
+    
 }
 
 //MARK: - TableView Delegate
@@ -192,6 +202,7 @@ extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
         self.timer?.invalidate()
 
         guard Reachabilty.HasConnection() else {
+            resetSearch()
             searchController.isActive = false
             showAlert(message: "No Internet Connection")
             return
@@ -224,8 +235,6 @@ extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
             
             self.searchController.isActive = false
             self.tabBarController?.showLoadindView(false)
-
-            
         }
      
     }
