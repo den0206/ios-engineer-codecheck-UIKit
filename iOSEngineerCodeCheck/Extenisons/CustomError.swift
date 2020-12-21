@@ -9,13 +9,13 @@
 import Foundation
 
 enum APIError : Error {
-    case noUrl
+    case noURL
     case NoData
     
     var errorDescription : String? {
         switch self {
        
-        case .noUrl:
+        case .noURL:
             return NSLocalizedString("Repositry URLが見つかりません", comment: "")
         case .NoData:
             return NSLocalizedString("Repositry Dataが見つかりません", comment: "")

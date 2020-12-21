@@ -12,8 +12,8 @@ import RealmSwift
 
 final class RealmManager {
     
-    let realm = try! Realm()
-    let limit = 20
+    private let realm = try! Realm()
+    private let limit = 20
   
     func addFavorite(repo : Repositry) {
         
@@ -44,12 +44,19 @@ final class RealmManager {
         })
     }
     
+    /// 引数参照 Repositry && Favorite
     func deleteFavorite(repo : Repositry) {
         
         let favorite = realm.objects(Favorite.self).filter("repoId == \(repo.id)")
         
         try! realm.write({
             realm.delete(favorite)
+        })
+    }
+    func deleteFavorite(fav : Favorite) {
+        
+        try! realm.write({
+            realm.delete(fav)
         })
     }
     

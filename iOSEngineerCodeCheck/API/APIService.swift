@@ -25,7 +25,7 @@ final class APIService {
         let baseUrl = "https://api.github.com/search/repositories?q=\(searchWord)&page=\(currentPage)&per_page=\(per_Page)"
         
         guard let url = URL(string: baseUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") else {
-            completion(.failure(APIError.noUrl))
+            completion(.failure(APIError.noURL))
             return
         }
         
@@ -54,7 +54,7 @@ final class APIService {
                         repositries.append(contentsOf: decorderData.items!)
                         
                         completion(.success(repositries))
-                        
+                        ///次のpaginationの用意
                         self.currentPage += 1
                        
                     }
@@ -76,7 +76,7 @@ final class APIService {
         
         guard let url = URL(string: baseUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") else {
             
-            completion(.failure(APIError.noUrl))
+            completion(.failure(APIError.noURL))
             return
             
         }

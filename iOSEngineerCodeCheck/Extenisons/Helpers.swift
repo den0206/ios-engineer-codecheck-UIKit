@@ -79,4 +79,47 @@ extension UIViewController {
     
 }
 
+//MARK: - TableView & CollectionView用のデータが存在しない時
+
+final class NoResultLabel : UILabel {
+    
+    enum DataType {
+        case Repositry,Favorite
+    }
+    
+    var dataType : DataType
+    
+    private let noResultLabel: UILabel =  {
+       let label = UILabel()
+        label.text = "検索結果がありません"
+        label.textColor = UIColor.black
+        label.textAlignment = .center
+        return label
+    }()
+    
+    init(type : DataType) {
+        self.dataType = type
+        super.init(frame: .zero)
+        
+        addSubview(noResultLabel)
+        
+        noResultLabel.center(inView: self)
+        
+        switch type {
+    
+        case .Repositry:
+            noResultLabel.text = "検索結果がありません"
+        case .Favorite:
+            noResultLabel.text = "お気に入りがありません"
+        }
+        
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
 

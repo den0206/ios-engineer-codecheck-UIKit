@@ -37,6 +37,7 @@ final class FavoriteViewController : UICollectionViewController, MainTabControll
         
     }
     
+    /// Navigation Bar Hidden
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
@@ -56,14 +57,11 @@ final class FavoriteViewController : UICollectionViewController, MainTabControll
     //MARK: - UI
     
     private func configureCV() {
-        /// BackButton タイトル
+        /// バックボタン名
         navigationItem.title = "Favorites"
-        
-        
         collectionView.backgroundColor = .white
         
         collectionView.register(FavoriteCell.self, forCellWithReuseIdentifier: FavoriteCell.reuseIdentifier)
-        
         collectionView.register(FavoriteHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: FavoriteHeaderView.reuseIdentifier)
         
     }
@@ -88,8 +86,8 @@ final class FavoriteViewController : UICollectionViewController, MainTabControll
     /// Tab選択時に,Collectionview最上部にスクロール
     func didSelectTab(tabBarController: UITabBarController) {
         
-        guard favorites != nil else {return}
-        
+        guard favorites != nil else { fetchFavorites();return}
+       
         collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
     
@@ -98,6 +96,21 @@ final class FavoriteViewController : UICollectionViewController, MainTabControll
 //MARK: - UICollectionView Delegate
 
 extension FavoriteViewController {
+    
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        if favorites == nil || favorites.count == 0 {
+            ///Label - "お気に入りがありません" 表示
+            let label = NoResultLabel(type: .Favorite)
+            label.frame = collectionView.frame
+            collectionView.backgroundView = label
+        } else {
+            collectionView.backgroundView = nil
+        }
+       
+    
+        return 1
+    }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return favorites != nil ? favorites.count : 0
@@ -149,7 +162,7 @@ extension FavoriteViewController {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: FavoriteHeaderView.reuseIdentifier, for: indexPath) as! FavoriteHeaderView
         
         if kind == UICollectionView.elementKindSectionHeader {
-            header.favoriteConterLabel.text = "お気に入り\(favorites.count) 件"
+            header.favoriteConterLabel.text = "お気に入り \(favorites != nil ? favorites.count : 0) 件"
         }
         
         return header
@@ -176,19 +189,16 @@ extension FavoriteViewController {
     }
     
     private func deleteItem(index : IndexPath) {
-        let realm = try! Realm()
-        let favorite = favorites[index.item]
         
+        let favorite = favorites[index.item]
         let alert = UIAlertController(title: "Delete", message: "お気に入りを削除しても宜しいでしょうか？", preferredStyle: .alert)
        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
        
        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
            self.collectionView.deleteItems(at: [index])
         
-        try! realm.write {
-            realm.delete(favorite)
-        }
-           
+        self.RM.deleteFavorite(fav: favorite)
+        
        }))
         
         present(alert, animated: true, completion: nil)

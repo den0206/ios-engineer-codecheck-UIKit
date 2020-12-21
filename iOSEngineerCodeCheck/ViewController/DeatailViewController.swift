@@ -62,8 +62,8 @@ class DetailViewController : UIViewController {
     private func configureUI() {
         
         navigationController?.navigationBar.isTranslucent = false
-
         view.backgroundColor = .white
+        
         let header  = DetailHeaderView(frame: CGRect(x: 0, y: topPadding, width: view.frame.width, height:screenHight / 2))
         header.repo = repositry
         

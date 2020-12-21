@@ -43,37 +43,21 @@ final class SearchViewController : UITableViewController,MainTabControllerDelega
     
     private func configureNav() {
         
+        navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.title = "Search"
-        
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        
-        searchController.hidesNavigationBarDuringPresentation = true
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.delegate = self
-        searchController.searchBar.sizeToFit()
-        searchController.searchBar.placeholder = "Search Repositry"
-        searchController.searchBar.searchTextField.backgroundColor = .systemBackground
-        searchController.searchBar.autocapitalizationType = .none
-        
-        setupBarButtonItem()
+        configureSearch()
         
     }
     
     private func configureTableView() {
         
-        navigationController?.navigationBar.isTranslucent = false
-
         tableView.rowHeight = 60
-        
         tableView.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
         tableView.scrollIndicatorInsets = UIEdgeInsets(top:5 , left: 0, bottom: 5, right: 0)
-        
+        tableView.tableFooterView = UIView()
+
         tableView.register(SearchResultCell.self, forCellReuseIdentifier: SearchResultCell.reuseIdentifier)
 
-        
-        tableView.tableFooterView = UIView()
-        
     }
     
     private func setupBarButtonItem() {
@@ -116,6 +100,22 @@ final class SearchViewController : UITableViewController,MainTabControllerDelega
 //MARK: - TableView Delegate
 
 extension SearchViewController {
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        
+       
+        guard repositries.count > 0 else {
+            ///Label - "検索結果がありません" 表示
+            let label = NoResultLabel(type: .Repositry)
+            label.frame = tableView.frame
+            tableView.backgroundView = label
+            return 0
+        }
+        
+        tableView.backgroundView = nil
+        return 1
+        
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -161,6 +161,7 @@ extension SearchViewController {
 //MARK: - UISearchResultsUpdating, UISearchBarDelegate
 
 extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
+    
     /// インクリメンタルサーチ
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -215,11 +216,9 @@ extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
         service.searchRepos { (result) in
             
             switch result {
-            
             case .success(let repos):
                 
                 if repos.count > 0 {
-                    
                     switch isPagination {
                     
                     case true :
@@ -255,6 +254,21 @@ extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
         service.resetService()
     }
     
+    
+    private func configureSearch() {
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
+        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
+        searchController.searchBar.sizeToFit()
+        searchController.searchBar.placeholder = "Search Repositry"
+        searchController.searchBar.searchTextField.backgroundColor = .systemBackground
+        searchController.searchBar.autocapitalizationType = .none
+        
+        setupBarButtonItem()
+    }
     
 }
 
