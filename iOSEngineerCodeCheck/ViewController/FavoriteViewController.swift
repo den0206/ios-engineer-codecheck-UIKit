@@ -37,15 +37,19 @@ final class FavoriteViewController : UICollectionViewController, MainTabControll
         
     }
     
-    /// Navigation Bar Hidden
+    
+    /// Navigation Bar 管理
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+
+    
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewWillDisappear(_ animated: Bool) {super.viewWillAppear(animated)
+        super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.isHidden = false
+
 
     }
     
@@ -64,9 +68,10 @@ final class FavoriteViewController : UICollectionViewController, MainTabControll
         collectionView.register(FavoriteCell.self, forCellWithReuseIdentifier: FavoriteCell.reuseIdentifier)
         collectionView.register(FavoriteHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: FavoriteHeaderView.reuseIdentifier)
         
+        
     }
     
-    //MARK: - Favorite
+    //MARK: - Fetch Favorites
     
     private func fetchFavorites() {
         
@@ -86,7 +91,7 @@ final class FavoriteViewController : UICollectionViewController, MainTabControll
     /// Tab選択時に,Collectionview最上部にスクロール
     func didSelectTab(tabBarController: UITabBarController) {
         
-        guard favorites != nil else { fetchFavorites();return}
+        guard favorites != nil && favorites.count > 0 else { fetchFavorites();return}
        
         collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
@@ -107,7 +112,7 @@ extension FavoriteViewController {
         } else {
             collectionView.backgroundView = nil
         }
-       
+
     
         return 1
     }
@@ -124,6 +129,7 @@ extension FavoriteViewController {
         
         cell.favorite = favorites[indexPath.item]
         
+        /// お気に入り削除の為の,LongTapGestureを付与
         cell.addGestureRecognizer(longPressGesture)
         
         return cell
@@ -134,8 +140,43 @@ extension FavoriteViewController {
         var fav : Favorite
         fav = favorites[indexPath.item]
         
+        showDetailVC(fav: fav)
+  
+    }
+    
+
+    /// CollectionView Header お気に入り件数の表示
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: FavoriteHeaderView.reuseIdentifier, for: indexPath) as! FavoriteHeaderView
+        
+        if kind == UICollectionView.elementKindSectionHeader {
+            header.favoriteConterLabel.text = "お気に入り \(favorites != nil ? favorites.count : 0) 件"
+        }
+        
+        return header
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        
+        return CGSize(width: view.frame.width, height: 50)
+    }
+    
+  
+    //MARK: - Actions
+    
+    ///DetailVCへの遷移
+    private func showDetailVC(fav : Favorite) {
         self.tabBarController?.showLoadindView(true)
         
+        guard Reachabilty.HasConnection() else {
+            self.tabBarController?.showLoadindView(false)
+            showAlert(message: "No Internet Connection")
+            return
+            
+        }
+      
         /// Favorite ID から API経由でRepo Modelを獲得,遷移
         service.fetchRepo(repoId: fav.repoId) { (result) in
             
@@ -155,27 +196,7 @@ extension FavoriteViewController {
         }
     }
     
-    /// CollectionView Header お気に入り件数の表示
-    
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: FavoriteHeaderView.reuseIdentifier, for: indexPath) as! FavoriteHeaderView
-        
-        if kind == UICollectionView.elementKindSectionHeader {
-            header.favoriteConterLabel.text = "お気に入り \(favorites != nil ? favorites.count : 0) 件"
-        }
-        
-        return header
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        
-        return CGSize(width: view.frame.width, height: 50)
-    }
-    
-    
-    //MARK: - Delete
-    
+    /// Delete Favorite
     @objc func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
         
         /// ロングタップアイテムの特定

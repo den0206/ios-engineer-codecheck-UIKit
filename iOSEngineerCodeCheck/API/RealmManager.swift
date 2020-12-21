@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import PKHUD
 
 ///Realmの管理は,当クラスで管理を一任
 
@@ -33,7 +34,8 @@ final class RealmManager {
             favorite.thumbnailUrl = thumbnailUrl
             
             realm.add(favorite, update: .all)
-            
+            HUD.flash(.labeledSuccess(title: "お気に入り", subtitle: "追加しました"), delay: 1.0)
+
             /// limit
             if realm.objects(Favorite.self).count == limit + 1 {
                 realm.delete(realm.objects(Favorite.self).first!)
@@ -51,12 +53,16 @@ final class RealmManager {
         
         try! realm.write({
             realm.delete(favorite)
+            HUD.flash(.labeledError(title: "お気に入り", subtitle: "削除しました"), delay: 1.0)
+
         })
     }
     func deleteFavorite(fav : Favorite) {
         
         try! realm.write({
             realm.delete(fav)
+            HUD.flash(.labeledError(title: "お気に入り", subtitle: "削除しました"), delay: 1.0)
+
         })
     }
     

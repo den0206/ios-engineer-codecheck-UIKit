@@ -21,9 +21,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         window = UIWindow(windowScene: scene)
-        /// Root を tab に変更
+        /// Root を Tab に変更
         window?.rootViewController = MainTabController()
         window?.makeKeyAndVisible()
+        
+        /// disable DarkMode 
+        if #available(iOS 13.0, *) {
+            window?.overrideUserInterfaceStyle = .light
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

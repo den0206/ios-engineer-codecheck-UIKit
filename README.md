@@ -1,37 +1,115 @@
-# 株式会社ゆめみ iOS エンジニアコードチェック課題
+# 設計概要 (iOSEngineerCodeCheck-UIKit)
 
-## 概要
+  
 
-本プロジェクトは株式会社ゆめみ（以下弊社）が、弊社に iOS エンジニアを希望する方に出す課題のベースプロジェクトです。本課題が与えられた方は、下記の概要を詳しく読んだ上で課題を取り組んでください。
+|動作イメージ1|動作イメージ2|
+|---|---|
+|![動作イメージ](README_Images/test.gif)|![動作イメージ](README_Images/test-1.gif)|
 
-## アプリ仕様
+  
 
-本アプリは GitHub のリポジトリーを検索するアプリです。
+<br>
 
-![動作イメージ](README_Images/app.gif)
+# UI設計
 
-### 環境
 
-- IDE：基本最新の安定版（本概要作成時点では Xcode 11.4.1）
-- Swift：基本最新の安定版（本概要作成時点では Swift 5.1）
-- 開発ターゲット：基本最新の安定版（本概要作成時点では iOS 13.4）
-- サードパーティーライブラリーの利用：オープンソースのものに限り制限しない
+### **ViewController構造**
 
-### 動作
+- ****MainTabBarController**** : <br>RootViewであるTabを構成する為に、UITabBarControllerを継承したVC。ナビゲーションコントローラー生成のHelper Function作成しtabItem 生成の簡略化。UITabBarControllerDelegate,didSelectによりTabItem 選択を検知。
 
-1. 何かしらのキーワードを入力
-2. GitHub API（`search/repositories`）でリポジトリーを検索し、結果一覧を概要（リポジトリ名）で表示
-3. 特定の結果を選択したら、該当リポジトリの詳細（リポジトリ名、オーナーアイコン、プロジェクト言語、Star 数、Watcher 数、Fork 数、Issue 数）を表示
+- ****SearchViewController**** :
+NavigationbarのUISearchControllerを使用しリポジトリの検索。UItableViewController を継承し作成。rightBarButtonItemにUISwitchを加え検索モードの変更が可能。一度の検索で20件毎getを行い,下部スクロールを行うごとの,ページネーションを実装。
 
-## 課題取り組み方法
+- ****DetailViewController**** :
+リポジトリの詳細情報を掲載。Header とFooter二つの子ビューにより構成される。Footer の星形をタップする毎にお気に入りに追加・削除することが出来る。
 
-Issues を確認した上、本プロジェクトを [**Duplicate** してください](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/duplicating-a-repository)（Fork しないようにしてください。必要ならプライベートリポジトリーにしても大丈夫です）。今後のコミットは全てご自身のリポジトリーで行ってください。
+- ****FavoriteViewController**** :
+全お気に入り掲載をUICollectionViewController を継承し作成。上限は20件。タップでDetailVCへの遷移,ロングタップでお気に入り削除アラートが表示され操作を行う。
 
-コードチェックの課題 Issue は全て [`課題`](https://github.com/yumemi/ios-engineer-codecheck/milestone/1) Milestone がついており、難易度に応じて Label が [`初級`](https://github.com/yumemi/ios-engineer-codecheck/issues?q=is%3Aopen+is%3Aissue+label%3A初級+milestone%3A課題)、[`中級`](https://github.com/yumemi/ios-engineer-codecheck/issues?q=is%3Aopen+is%3Aissue+label%3A中級+milestone%3A課題+) と [`ボーナス`](https://github.com/yumemi/ios-engineer-codecheck/issues?q=is%3Aopen+is%3Aissue+label%3Aボーナス+milestone%3A課題+) に分けられています。課題の必須／選択は下記の表とします：
 
-|   | 初級 | 中級 | ボーナス
-|--:|:--:|:--:|:--:|
-| 新卒／未経験者 | 必須 | 選択 | 選択 |
-| 中途／経験者 | 必須 | 必須 | 選択 |
+### **View構造**
 
-課題が完成したら、リポジトリーのアドレスを教えてください。
+
+- ****SearchResultCell****:
+SearchViewControllerにて使用,UITableViewCellを継承.。Repositry propertyを所有し,VCにてSet後,titleLabelを更新。
+
+- ****FavoriteCell****:
+FavoriteViewControllerにて使用,UICollectionViewCellを継承.。Favorite propertyを所有し,VCにてSet後,imageview, titlelabelを更新。画像の更新にSDWebImageを使用。
+
+
+
+- ****DetailHeaderView & DetailFooterViewl****:
+DetailViewControllerにて使用。共にUIViewを継承。View表示後、更新の可能性により分離。後者には,DetailFooterViewProtocolを作成、VCに批准させ。gesture操作を検知。
+
+- ****FavoriteHeaderView****:
+FavoriteViewControllerにて使用。collectionView使用の為,UICollectionReusableViewを継承。お気に入り総数を掲載するfavoriteConterLabelを所有。
+
+<br>
+
+# MODEL & API
+
+
+- ****GitHubSearchResultModel****: 
+Codableを批准しJSON型をデータ型にdecodeしています。Repositry構造体にて,falseを初期値とし、変数 favorited定義。
+
+- ****Favorite****:
+ Realmにて保存するデータモデル。<br>FavoriteCellにて表示する最低限のカラムをpropertyに持つ。
+
+
+
+```swift
+/// Realm Data
+
+import RealmSwift
+
+final class Favorite : Object {
+    
+    @objc dynamic var id = 0
+    @objc dynamic var repoId = 0
+    
+    /// cellに表示する property
+    @objc dynamic var title = ""
+    @objc dynamic var thumbnailUrl = ""
+    
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+}
+
+```
+
+ 
+
+- ****APIService****:
+基本的なAPI処理を一任しているクラス。<br>URLSessionを使用しJSON取得後,JSONDecoderを用いparseしています。
+
+  
+
+- ****RealmManager****:
+ 外部ライブラリ・Realm処理を一任しているクラス。<br>データベースのCRUD処理を纏める事により,処理の複雑化を避ける為に作成。
+
+  
+
+### **ライブラリ**
+___
+
+- pod 'SDWebImage'
+- pod 'RealmSwift'
+- pod 'PKHUD'
+
+### **動作環境**
+___
+
+- IDE：Xcode 12.3
+- Swift：5.3
+- iOS : 14.3
+
+ ___
+
+<div style="text-align: right;">
+2020年12月24日<br>
+酒井 佑樹
+<div>
+
+

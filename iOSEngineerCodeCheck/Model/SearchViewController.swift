@@ -23,7 +23,8 @@ final class SearchViewController : UITableViewController,MainTabControllerDelega
     }
     
     private let service = APIService()
-    private let searchController = UISearchController(searchResultsController: nil)
+    private let tableViewEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
+    let searchController = UISearchController(searchResultsController: nil)
     
     var reachLast = false
     var timer : Timer?
@@ -52,8 +53,8 @@ final class SearchViewController : UITableViewController,MainTabControllerDelega
     private func configureTableView() {
         
         tableView.rowHeight = 60
-        tableView.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
-        tableView.scrollIndicatorInsets = UIEdgeInsets(top:5 , left: 0, bottom: 5, right: 0)
+        tableView.contentInset = tableViewEdgeInsets
+        tableView.scrollIndicatorInsets = tableViewEdgeInsets
         tableView.tableFooterView = UIView()
 
         tableView.register(SearchResultCell.self, forCellReuseIdentifier: SearchResultCell.reuseIdentifier)
@@ -88,11 +89,10 @@ final class SearchViewController : UITableViewController,MainTabControllerDelega
     
     /// Tab選択時に,最上部にスクロール
     func didSelectTab(tabBarController: UITabBarController) {
+        guard repositries.count > 0 else {return}
         
-        if repositries.count > service.per_Page {
-            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-
-        }
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+    
     }
     
 }
@@ -200,6 +200,7 @@ extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
      
     }
     
+    /// 当ViewCopntroller API通信の一任
     func sendRequest(isPagination : Bool = false) {
         
         self.timer?.invalidate()
@@ -248,9 +249,10 @@ extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
         resetSearch()
     }
     
-    private func resetSearch() {
+    private func resetSearch(deleteWord : Bool = true ) {
         reachLast = false
         repositries.removeAll()
+        
         service.resetService()
     }
     
@@ -258,6 +260,8 @@ extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
     private func configureSearch() {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.obscuresBackgroundDuringPresentation = false
+
         
         searchController.hidesNavigationBarDuringPresentation = true
         searchController.searchResultsUpdater = self

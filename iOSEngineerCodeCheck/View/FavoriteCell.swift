@@ -31,7 +31,7 @@ final class FavoriteCell : UICollectionViewCell {
         return iv
     }()
     
-    private let titleLabel : UILabel = {
+   let titleLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textAlignment = .center

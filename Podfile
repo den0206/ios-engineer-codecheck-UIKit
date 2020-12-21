@@ -7,6 +7,8 @@ target 'iOSEngineerCodeCheck' do
   
   pod 'SDWebImage'
   pod 'RealmSwift'
+  
+  pod 'PKHUD'
 
   # Pods for iOSEngineerCodeCheck
 
