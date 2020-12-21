@@ -20,6 +20,7 @@ struct Repositry : Codable,Identifiable{
     let id : Int
     let name : String
     let fullName : String
+    let htmlURL : String
     let language : String?
     let starCount : Int?
     let wacherscount : Int?
@@ -36,6 +37,7 @@ struct Repositry : Codable,Identifiable{
         case wacherscount = "wachers_count"
         case forksCount = "forks_count"
         case issuesCount = "open_issues_count"
+        case htmlURL = "html_url"
     }
  
 }

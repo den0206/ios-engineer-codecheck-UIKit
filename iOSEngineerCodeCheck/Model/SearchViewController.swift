@@ -56,7 +56,8 @@ final class SearchViewController : UITableViewController,MainTabControllerDelega
         tableView.contentInset = tableViewEdgeInsets
         tableView.scrollIndicatorInsets = tableViewEdgeInsets
         tableView.tableFooterView = UIView()
-
+        
+        tableView.accessibilityIdentifier = SearchResultCell.reuseIdentifier
         tableView.register(SearchResultCell.self, forCellReuseIdentifier: SearchResultCell.reuseIdentifier)
 
     }

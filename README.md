@@ -4,7 +4,7 @@
 
 |動作イメージ1|動作イメージ2|
 |---|---|
-|![動作イメージ](README_Images/test.gif)|![動作イメージ](README_Images/test-1.gif)|
+|![動作イメージ](README_Images/screen.gif)|![動作イメージ](README_Images/screen-1.gif)|
 
   
 

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class DetailViewController : UIViewController {
     
@@ -61,6 +60,7 @@ class DetailViewController : UIViewController {
     
     private func configureUI() {
         
+        navigationItem.title = repositry.name
         navigationController?.navigationBar.isTranslucent = false
         view.backgroundColor = .white
         
@@ -82,6 +82,15 @@ class DetailViewController : UIViewController {
 //MARK: - Manage Favorite
 
 extension DetailViewController : DetailFooterViewProtocol {
+    
+    func tappedUrl(footer: DetailFooterView) {
+        
+        if let url = URL(string:repositry.htmlURL) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+ 
+        }
+    }
+    
     
     func handleFavorite(footer: DetailFooterView) {
         
