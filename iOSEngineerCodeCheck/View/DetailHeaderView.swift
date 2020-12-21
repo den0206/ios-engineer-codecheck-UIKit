@@ -56,7 +56,9 @@ final class DetailHeaderView : UIView {
         guard let repo = repo else {return}
         
         let url = URL(string : repo.owner.avatarURL)
+        imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
         imageView.sd_setImage(with: url)
+       
         
         titleLabel.text = repo.fullName
     }

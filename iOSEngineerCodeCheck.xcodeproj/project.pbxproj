@@ -66,7 +66,6 @@
 		3A6934D9258DF848006268F9 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		3A798C05258F255F00FF2D9F /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		3A798C0A258F296200FF2D9F /* FavoriteHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteHeaderView.swift; sourceTree = "<group>"; };
-		3AA545B6258F0D85003411C8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3ACAE039258CCCE20076D8F5 /* GitHubSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchResult.swift; sourceTree = "<group>"; };
 		3ACAE040258CD0160076D8F5 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		3ACAE05A258CEC3D0076D8F5 /* DeatailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeatailViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +121,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A22D6B2259057840082DD87 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
 		3A47EEEB258CBB6E00BB1591 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,9 +225,9 @@
 				3A47EEEC258CBB7100BB1591 /* ViewController */,
 				3ACAE03E258CCE3E0076D8F5 /* API */,
 				3A47EF16258CC65400BB1591 /* Extenisons */,
+				3A22D6B2259057840082DD87 /* Test */,
 				BFD945E7244DC5EB0012785A /* Assets.xcassets */,
 				BFD945E9244DC5EB0012785A /* LaunchScreen.storyboard */,
-				3AA545B6258F0D85003411C8 /* README.md */,
 				BFD945EC244DC5EB0012785A /* Info.plist */,
 			);
 			path = iOSEngineerCodeCheck;
@@ -678,7 +684,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4KJFNVZ8R6;
 				INFOPLIST_FILE = iOSEngineerCodeCheck/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -687,7 +693,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jp.yumemi.iOSEngineerCodeCheck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -697,7 +703,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4KJFNVZ8R6;
 				INFOPLIST_FILE = iOSEngineerCodeCheck/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -706,7 +712,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jp.yumemi.iOSEngineerCodeCheck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -719,7 +725,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S7G9J68NLX;
 				INFOPLIST_FILE = iOSEngineerCodeCheckTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -742,7 +748,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S7G9J68NLX;
 				INFOPLIST_FILE = iOSEngineerCodeCheckTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
