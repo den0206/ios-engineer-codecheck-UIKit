@@ -46,7 +46,7 @@ final class FavoriteViewController : UICollectionViewController, MainTabControll
     
     }
     
-    override func viewWillDisappear(_ animated: Bool) {super.viewWillAppear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.isHidden = false
 

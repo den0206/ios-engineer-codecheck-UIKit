@@ -131,7 +131,7 @@ extension iOSEngineerCodeCheckTests {
  
         let owner : Owner = .init(id: ownerId, login: login, avatarURL: avatarURL, gravatarID: gravatarID)
         
-        let repo : Repositry = .init(id: id, name: name, fullName: fullname, language: nil, starCount: nil, wacherscount: nil, forksCount: nil, issuesCount: nil, owner: owner)
+        let repo : Repositry = .init(id: id, name: name, fullName: fullname, htmlURL: "URL", language: nil, starCount: nil, wacherscount: nil, forksCount: nil, issuesCount: nil, owner: owner)
         
         return repo
     }

@@ -29,6 +29,7 @@ final class DetailHeaderView : UIView {
     private let titleLabel : UILabel = {
         let label = UILabel()
         label.text = "Sample"
+        label.numberOfLines = 1
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.textAlignment = .center
         return label
@@ -42,7 +43,7 @@ final class DetailHeaderView : UIView {
         
         addSubview(titleLabel)
         titleLabel.centerX(inView: self)
-        titleLabel.anchor(top : imageView.bottomAnchor, bottom: bottomAnchor, paddingTop: 12)
+        titleLabel.anchor(top : imageView.bottomAnchor, left : leftAnchor, bottom: bottomAnchor,right: rightAnchor, paddingTop: 12,paddingLeft: 16,paddingRight: 16)
      
     }
     

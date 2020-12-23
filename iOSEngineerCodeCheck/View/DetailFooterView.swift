@@ -10,6 +10,7 @@ import UIKit
 
 protocol DetailFooterViewProtocol : class {
     func handleFavorite(footer : DetailFooterView)
+    func tappedUrl(footer : DetailFooterView)
 }
 
 final class DetailFooterView : UIView {
@@ -52,12 +53,33 @@ final class DetailFooterView : UIView {
         
     }()
     
+    private lazy var urlLabel : UILabel = {
+       
+        let label = configureLabel()
+        
+        /// 下部線あり
+        let attributedString = NSMutableAttributedString.init(string: "リンク先")
+          attributedString.addAttribute(NSAttributedString.Key.underlineStyle, value: 1, range:
+              NSRange.init(location: 0, length: attributedString.length));
+        
+        label.attributedText = attributedString
+        label.textColor = .systemBlue
+        label.isUserInteractionEnabled = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedUrl))
+        label.addGestureRecognizer(tap)
+        
+        return label
+        
+    }()
+    
+    
+    
     private lazy var favoriteStarImage : UIImageView = {
         
         let iv = UIImageView()
-        let ivConfig = UIImage.SymbolConfiguration(pointSize: 30)
      
-        iv.image = UIImage(systemName: "star",withConfiguration: ivConfig)
+        iv.image = UIImage(systemName: "star")
         iv.isUserInteractionEnabled  = true
         iv.tintColor = .gray
         
@@ -71,20 +93,27 @@ final class DetailFooterView : UIView {
         
         super.init(frame: frame)
         
-        addSubview(langLabel)
-        langLabel.anchor(top: topAnchor, left: leftAnchor, paddingTop: 10, paddingLeft: 8, width:frame.width / 2)
+        let leftstack = UIStackView(arrangedSubviews: [langLabel, urlLabel])
+        
+        leftstack.axis = .vertical
+        leftstack.alignment = .leading
+        leftstack.spacing  = 16
+        
+        addSubview(leftstack)
 
-        let stack = UIStackView(arrangedSubviews: [starsLabel,wathersLabel,forksLabel,issueLabel,favoriteStarImage])
+        leftstack.anchor(top: topAnchor, left: leftAnchor, paddingTop: 10, paddingLeft: 8, width:frame.width / 2)
 
-        stack.axis = .vertical
-        stack.alignment = .trailing
-        stack.spacing  = 16
+        let rightstack = UIStackView(arrangedSubviews: [favoriteStarImage,starsLabel,wathersLabel,forksLabel,issueLabel])
 
-        stack.distribution = .equalSpacing
+        rightstack.axis = .vertical
+        rightstack.alignment = .trailing
+        rightstack.spacing  = 16
 
-        addSubview(stack)
+        rightstack.distribution = .equalSpacing
 
-        stack.anchor(top : langLabel.topAnchor, right : rightAnchor,paddingRight: 16,width:frame.height / 2)
+        addSubview(rightstack)
+
+        rightstack.anchor(top : leftstack.topAnchor, right : rightAnchor,paddingRight: 16,width:frame.height / 2)
   
     }
     
@@ -110,11 +139,16 @@ final class DetailFooterView : UIView {
         
     }
     
+    @objc func tappedUrl() {
+        delegate?.tappedUrl(footer: self)
+    }
+    
     @objc func tappedFavorite() {
         
         delegate?.handleFavorite(footer: self)
 
     }
+    
     
    //MARK: - UI Extensions
     
@@ -135,13 +169,16 @@ final class DetailFooterView : UIView {
     }
     
     func configureStarImage(repo : Repositry) {
-      
+        
+        let ivConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .bold)
+
         switch repo.favorited {
         case true :
-            favoriteStarImage.image = UIImage(systemName: "star.fill")
+            favoriteStarImage.image = UIImage(systemName: "star.fill",withConfiguration: ivConfig)
             favoriteStarImage.tintColor = .yellow
         case false :
-            favoriteStarImage.image = UIImage(systemName: "star")
+            
+            favoriteStarImage.image = UIImage(systemName: "star", withConfiguration: ivConfig)
             favoriteStarImage.tintColor = .gray
        
         }
