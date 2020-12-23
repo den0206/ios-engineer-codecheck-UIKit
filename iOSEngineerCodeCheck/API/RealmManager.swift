@@ -40,9 +40,7 @@ final class RealmManager {
             if realm.objects(Favorite.self).count == limit + 1 {
                 realm.delete(realm.objects(Favorite.self).first!)
             }
-            
-            print(Realm.Configuration.defaultConfiguration.fileURL!)
-            print("call")
+           
         })
     }
     
