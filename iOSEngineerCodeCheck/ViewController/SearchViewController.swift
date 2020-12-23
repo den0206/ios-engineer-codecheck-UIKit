@@ -176,8 +176,8 @@ extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
             
             service.searchWord = text
             timer?.invalidate()
-            /// リクエストの間隔を0.5秒に設定,
-            timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+            /// リクエストの間隔を0.7秒に設定,
+            timer = Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false, block: { (_) in
                 self.sendRequest()
             })
             
@@ -203,10 +203,8 @@ extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
     
     /// 当ViewCopntroller API通信の一任
     func sendRequest(isPagination : Bool = false) {
-        
-        self.timer?.invalidate()
-
         guard Reachabilty.HasConnection() else {
+            self.timer?.invalidate()
             resetSearch()
             searchController.isActive = false
             showAlert(message: "No Internet Connection")
@@ -238,6 +236,7 @@ extension SearchViewController : UISearchResultsUpdating, UISearchBarDelegate {
                 
             }
             
+            self.timer?.invalidate()
             self.searchController.isActive = false
             self.tabBarController?.showLoadindView(false)
  

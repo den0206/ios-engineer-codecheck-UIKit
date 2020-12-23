@@ -13,7 +13,7 @@ import Foundation
 final class APIService {
     
     var searchWord : String = ""
-    var currentPage = 0
+    var currentPage = 1
     
     private let decorder = JSONDecoder()
     let per_Page = 20
@@ -52,7 +52,7 @@ final class APIService {
                     DispatchQueue.main.async {
                         
                         repositries.append(contentsOf: decorderData.items!)
-                        
+                     
                         completion(.success(repositries))
                         ///次のpaginationの用意
                         self.currentPage += 1
@@ -116,6 +116,6 @@ final class APIService {
     
     func resetService() {
         searchWord = ""
-        currentPage = 0
+        currentPage = 1
     }
 }
